@@ -1,3 +1,8 @@
+@import 'tailwindcss/base';
+
+@import 'tailwindcss/components';
+
+@import 'tailwindcss/utilities';
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +15,50 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+.battleship-board {
+  display: block;
+}
+
+.success-message {
+  /* Apply styles for your message */
+  background-color: #4caf50; /* Green background color */
+  color: white; /* White text color */
+  padding: 16px; /* Padding for better visibility */
+  margin-bottom: 16px; /* Margin to separate from other content */
+  width: 100%;
+  display: block;
+}
+
+.failed-message {
+  /* Apply styles for your message */
+  background-color: #ce1f1f; /* Green background color */
+  color: white; /* White text color */
+  padding: 16px; /* Padding for better visibility */
+  margin-bottom: 16px; /* Margin to separate from other content */
+  width: 100%;
+  display: block;
+}
+
+/* Hide animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Apply the hide animation to the hidden class */
+.hidden {
+  display: none;
+}
+
+.animate-fadeIn {
+  animation: zoomIn 0.5s;
+}
+.disabled {
+  background-color: #ccc; /* Set a background color to visually indicate the disabled state */
+  pointer-events: none; /* Make the cell unclickable */
 }

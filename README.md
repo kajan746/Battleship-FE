@@ -19,28 +19,16 @@ You will also see any lint errors in the console.
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Configure the .env
+Change the REACT_APP_SERVER_DOMAIN value in the .env file
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### Game steps
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+If you are a new user, you need to register yourself in the begining. Else you will be redirected to Ships arrangement page.
 
-### `npm run eject`
+In the ship arrangement page drag and place your ships. you can choose the orientation as well. When dragging you will see a light green color shadow in the grid. that will be the first cell of your ship. Then click `Play` button.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Then you will be redirected to `Battle field` page. Here you cannot see the Robot's board. Right below the `Restart` button, the system will notify the user's move.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Once the game over, you can see the lead board.
