@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import bg from "../assets/sounds/bg.mp3";
 
 interface User {
   _id: number;
@@ -11,9 +12,17 @@ interface User {
 const LeadBoardComponent = () => {
   const [users, setUsers] = useState([]);
   const apiUrl = `${process.env.REACT_APP_SERVER_DOMAIN}`;
+  let audio = new Audio(bg);
   let currentUser: any;
+  function playSound() {
+    audio.loop = true; // Loop the audio
+    audio.play().catch(error => {
+      console.error('Failed to play audio:', error);
+    });
+  }
   useEffect(() => {
     fetchUsers();
+    playSound();
   }, []);
 
   //COnverting the current user details which is stored in the local storage
@@ -31,6 +40,7 @@ const LeadBoardComponent = () => {
     } catch (error) {
       console.error("Error fetching users:", error);
     }
+    
   };
 
   return (

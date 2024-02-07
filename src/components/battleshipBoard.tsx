@@ -40,12 +40,13 @@ const BattleshipBoard: React.FC = () => {
       setCurrentPlayer(currentPlayer);
       setPreviousPlayer(player);
     }
+
   };
 
   useEffect(() => {
     setNewGame(true);
   }, []);
-
+  
   //This function will run at the end of the game. This will update the leadboard
   const updateGameStatus = async () => {
     let userDetailsString = localStorage.getItem("battleshipUser");

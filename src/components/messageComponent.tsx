@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import clapImg from "../assets/images/clap.gif";
 import laughImg from "../assets/images/laugh.gif";
 import angryImg from "../assets/images/angry.gif";
+import angrySound from "../assets/sounds/angry.mp3";
+import laughSound from "../assets/sounds/laugh.mp3";
+import clapSound from "../assets/sounds/clap.mp3";
 
 interface ChildProps {
   messageFromParent: string;
@@ -10,16 +13,33 @@ interface ChildProps {
 
 const MessageComponent: React.FC<ChildProps> = (props) => {
   const [showMessage, setShowMessage] = useState<string | null>(null);
+  let audio = new Audio();
+  let inProgress:boolean = false;
+  function playsound() {
+    if (angryMessages.includes(props.messageFromParent)) {
+      audio.src = angrySound;
+    } else if(failedMessages.includes(props.messageFromParent)) {
+      audio.src = laughSound;
+    } else {
+      audio.src = clapSound;
+    }
+    audio.play();
+  }
   useEffect(() => {
     // Show the message when the component mounts
     if (props.messageFromParent != "") {
       setShowMessage(props.messageFromParent);
     }
-
+    if(!inProgress) {
+      inProgress = true;
+      playsound();
+      console.log(2);
+    }
     // Clear the displayed message after 3 seconds
     const timeout = setTimeout(() => {
       setShowMessage(null);
-    }, 3000);
+      inProgress = false;
+    }, 4000);
 
     return () => clearTimeout(timeout); // Cleanup timeout on component unmount
   }, [props.messageFromParent]);
