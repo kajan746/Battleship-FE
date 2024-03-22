@@ -23,6 +23,8 @@ interface ChildProps {
 let usedPositions: { [key: string]: boolean } = {};
 let clickedPositions: { [key: string]: boolean } = {};
 var inProgress: boolean = false;
+let recentHits: { [key: string]: boolean } = {};
+let posibleTargets: { x: number; y: number;}[] = [];
 
 const initialShips: Ship[] = [
   { id: 1, length: 5, hits: 0, positions: [], sunk: false },
@@ -105,6 +107,15 @@ const UserBoard: React.FC<ChildProps> = (props) => {
     clickedPositions = {};
   }
 
+  function getPossibleNearestCoordinates(x:number, y:number) {
+    return [
+      { x: x, y: y - 1 }, // Up
+      { x: x, y: y + 1 }, // Down
+      { x: x + 1, y: y }, // Right
+      { x: x - 1, y: y }, // Left
+    ];
+  }
+
   useEffect(() => {
     const randomlyPlaceShips = () => {
       const updatedShips = initialShips.map((ship) => ({
@@ -166,11 +177,15 @@ const UserBoard: React.FC<ChildProps> = (props) => {
         const isAllShipsSunk = updatedShips.every((ship) => ship.sunk);
 
         if (isAllShipsSunk) {
-          sendData("Game Over! You won!!!");
+          sendData("Game Over! Robot won!!!");
         } else if (clickedShip.hits + 1 == clickedShip.length) {
           sendData("Ship Sunk!");
+          recentHits = {};
+          posibleTargets = [];
         } else {
           sendData("Hit!");
+          posibleTargets = getPossibleNearestCoordinates(row, col);
+          recentHits[row + "-" + col] = true;
         }
       } else {
         sendData("Oops...");
@@ -199,7 +214,15 @@ const UserBoard: React.FC<ChildProps> = (props) => {
 
   if (props.currentPlayer === "User" && !inProgress) {
     inProgress = true;
-    const initValue = generateRandomPosition();
+    let initValue:any = [];
+    if (posibleTargets.length>0) {
+      initValue = [posibleTargets[0]['x'], posibleTargets[0]['y']];
+      posibleTargets = posibleTargets.slice(1);
+      console.log(posibleTargets);
+      console.log('1111111111111');
+    } else {
+      initValue = generateRandomPosition();
+    }
     setTimeout(() => {
       generateValueAndCallFunction(initValue);
     }, 3200);
